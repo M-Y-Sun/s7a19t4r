@@ -1,0 +1,10 @@
+set selection-clipboard clipboard
+
+set window-height 1314
+set window-width 1100
+
+map p print
+map r reload
+map R rotate
+
+map D toggle_page_mode
