@@ -1,0 +1,72 @@
+#!/bin/bash
+
+source "$CONFIG_DIR/colors.sh"  # loads all defined colors
+
+# This is a demo config to showcase some of the most important commands.
+# It is meant to be changed and configured, as it is intentionally kept sparse.
+# For a (much) more advanced configuration example see my dotfiles:
+# https://github.com/FelixKratz/dotfiles
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+ITEM_DIR="$CONFIG_DIR/items"
+
+##### Bar Appearance #####
+# Configuring the general appearance of the bar.
+# These are only some of the options available. For all options see:
+# https://felixkratz.github.io/SketchyBar/config/bar
+# If you are looking for other colors, see the color picker:
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
+sketchybar --bar position=top height=38         \
+                              blur_radius=30    \
+                              position=top      \
+                              sticky=off        \
+                              padding_left=8    \
+                              padding_right=8   \
+                              color=$BAR_COLOR 
+
+##### Changing Defaults #####
+# We now change some default values, which are applied to all further items.
+# For a full list of all available item properties see:
+# https://felixkratz.github.io/SketchyBar/config/items
+
+default=(
+    padding_left=5
+    padding_right=5
+    label.font="DejaVuSansM Nerd Font:Bold:14.0"
+    label.color=$WHITE
+    icon.font="DejaVuSansM Nerd Font:Bold:17.0"
+    icon.color=$WHITE
+    background.color=$ITEM_BG_COLOR
+    background.corner_radius=5
+    background.height=24
+    icon.padding_left=8
+    icon.padding_right=4
+    label.padding_left=4
+    label.padding_right=8
+)
+sketchybar --default "${default[@]}"
+
+# left side items
+source $ITEM_DIR/apple.sh       # apple logo button
+source $ITEM_DIR/spaces.sh      # spaces
+source $ITEM_DIR/front_app.sh   # show front app
+
+# left notch items
+source $ITEM_DIR/iostat.sh      # io speed
+source $ITEM_DIR/cpu.sh         # cpu usage
+source $ITEM_DIR/ram.sh         # ram usage
+
+# right notch items
+source $ITEM_DIR/media.sh       # media 
+
+# right side items
+source $ITEM_DIR/calendar.sh    # calendar
+source $ITEM_DIR/battery.sh     # battery
+source $ITEM_DIR/network.sh     # network
+source $ITEM_DIR/volume.sh      # volume
+source $ITEM_DIR/weather.sh     # weather
+source $ITEM_DIR/lang.sh        # input language
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update
